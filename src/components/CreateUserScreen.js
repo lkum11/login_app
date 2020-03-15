@@ -102,7 +102,9 @@ const CreateUserScreen = props => {
             toast.success("Account created successfully",{
                 type: toast.TYPE.INFO,
             });
-            history.push('/')
+            setTimeout(() => {
+                history.push('/');
+            }, 3000);
         }
     }
 
@@ -141,7 +143,7 @@ const CreateUserScreen = props => {
                 title="Re-type username" 
                 type="text"
                 errorTxt="Please enter a same username."
-                error={(userState.userDetailState.cnfUserName !== null || !userState.userDetailState.cnfUserNameTouched) ? true : false}
+                error={(userState.userDetailState.cnfUserName === userState.userDetailState.userName || !userState.userDetailState.cnfUserNameTouched) ? true : false}
                 onChange={e => onChangeHandler(e.target.value,"cnfUserName")}
                 onfocus={e => onFocusHandler("cnfUserNameTouched")}
             />
@@ -157,7 +159,7 @@ const CreateUserScreen = props => {
                 title="Re-type password" 
                 type="password"
                 errorTxt="Please confirm password."
-                error={(userState.userDetailState.cnfPassword !== null || !userState.userDetailState.cnfPwdTouched) ? true : false}
+                error={((userState.userDetailState.cnfPassword === userState.userDetailState.password) || !userState.userDetailState.cnfPwdTouched) ? true : false}
                 onChange={e => onChangeHandler(e.target.value,"cnfPassword")}
                 onfocus={e => onFocusHandler("cnfPwdTouched")}
             />
